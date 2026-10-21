@@ -4,8 +4,8 @@ import {
   Menu, X, Sparkles, Camera, Tv, Award, Star, 
   Store, UserCheck, Calendar, MapPin, CheckCircle2, ChevronRight 
 } from 'lucide-react';
-import Navbar from './components/Navbar';
-import InscricaoForm from './components/InscricaoForm';
+import Navbar from './components/navbar';
+import InscricaoForm from './components/inscricaoForm';
 
 
 export default function App() {
