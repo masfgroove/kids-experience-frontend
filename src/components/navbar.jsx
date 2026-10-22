@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShieldCheck } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ onToggleAdmin, viewAdmin }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -24,7 +24,16 @@ export default function Navbar() {
           <a href="#local" className="hover:text-pink-400 transition">Local</a>
         </div>
 
-        <div className="hidden md:block">
+        {/* Botões Desktop */}
+        <div className="hidden md:flex items-center space-x-3">
+          <button
+            onClick={onToggleAdmin}
+            className="flex items-center space-x-1.5 px-4 py-2 bg-pink-600/20 border border-pink-500/40 text-pink-300 hover:bg-pink-600 hover:text-white rounded-full font-bold text-sm transition cursor-pointer"
+          >
+            <ShieldCheck size={16} />
+            <span>{viewAdmin ? 'Ver Site' : 'Painel Admin'}</span>
+          </button>
+
           <a 
             href="#inscricao" 
             className="bg-gradient-to-r from-pink-600 to-purple-600 px-5 py-2.5 rounded-full font-bold text-sm shadow-md text-white hover:opacity-90 transition transform hover:-translate-y-0.5"
@@ -34,7 +43,15 @@ export default function Navbar() {
         </div>
 
         {/* Botão Menu Mobile */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center space-x-2">
+          <button
+            onClick={onToggleAdmin}
+            className="p-2 bg-pink-600/20 text-pink-300 border border-pink-500/40 rounded-lg text-xs font-bold flex items-center space-x-1"
+          >
+            <ShieldCheck size={14} />
+            <span>Admin</span>
+          </button>
+
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-slate-300 hover:text-white focus:outline-none">
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
