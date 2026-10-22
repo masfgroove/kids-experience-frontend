@@ -6,11 +6,11 @@ import {
 } from 'lucide-react';
 import Navbar from './components/navbar';
 import InscricaoForm from './components/inscricaoForm';
-import AdminDashboard from './components/AdminDashboard'; // <-- Adicionado
+import AdminDashboard from './components/AdminDashboard'; 
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [viewAdmin, setViewAdmin] = useState(false); // <-- Adicionado para alternar entre o site e o painel admin
+  const [viewAdmin, setViewAdmin] = useState(false); // Estado para alternar entre o site e o painel admin
   
   const [formData, setFormData] = useState({
     nomeCompleto: '',
@@ -47,25 +47,16 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-pink-500 selection:text-white">
       
-      {/* BOTÃO DISCRETO PARA ACESSAR O PAINEL ADMIN */}
-      <div className="bg-slate-900 border-b border-slate-800 px-4 py-2 flex justify-end items-center text-xs">
-        <button 
-          onClick={() => setViewAdmin(!viewAdmin)}
-          className="flex items-center space-x-1.5 px-3 py-1.5 bg-pink-600/20 border border-pink-500/40 text-pink-300 hover:bg-pink-600 hover:text-white rounded-lg font-semibold transition cursor-pointer"
-        >
-          <ShieldCheck size={14} />
-          <span>{viewAdmin ? '← Voltar para o Site' : 'Painel Admin (Restrito)'}</span>
-        </button>
-      </div>
+      {/* NAVBAR FIXA COM A FUNÇÃO DE ABRIR/FECHAR O PAINEL ADMIN */}
+      <Navbar onToggleAdmin={() => setViewAdmin(!viewAdmin)} viewAdmin={viewAdmin} />
 
       {/* SE ESTIVER NO ADMIN, MOSTRA O PAINEL. SENÃO, MOSTRA O SITE COMPLETO */}
       {viewAdmin ? (
-        <AdminDashboard />
+        <div className="pt-24">
+          <AdminDashboard />
+        </div>
       ) : (
         <>
-          {/* NAVBAR FIXA */}
-          <Navbar/>
-
           {/* HEADER / HERO SECTION */}
           <header id="inicio" className="pt-32 pb-20 md:pt-40 md:pb-28 px-4 bg-gradient-to-b from-purple-950 via-slate-900 to-slate-950 relative overflow-hidden">
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ec4899_1px,transparent_1px)] [background-size:16px_16px]"></div>
@@ -128,7 +119,7 @@ export default function App() {
             </div>
           </header>
 
-          {/* PILE DE PILARES / DESTAQUES */}
+          {/* PILARES / DESTAQUES */}
           <section id="sobre" className="py-16 bg-slate-900 border-y border-slate-800">
             <div className="max-w-7xl mx-auto px-4">
               <div className="text-center max-w-2xl mx-auto mb-12">
@@ -337,7 +328,6 @@ export default function App() {
         </>
       )}
 
-    </div> 
-    
+    </div>
   );
 }
